@@ -8,6 +8,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <assert.h>
+#include <stdbool.h>
+
 
 typedef unsigned uint;
 

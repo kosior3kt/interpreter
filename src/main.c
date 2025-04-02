@@ -45,7 +45,7 @@ static void run_file(const char* _file_name)
 {
 	char* source_code = read_file(_file_name);
 	interpret_result_e result = vm_interpret(source_code);
-	free(file_contents);
+	free(source_code);
 
 	if(result == INTERPRETER_COMPILER_ERROR) exit(65);
 	if(result == INTERPRETER_RUNTIME_ERROR) exit(70);
@@ -66,7 +66,7 @@ static char* read_file(const char* _file_name)
 	int bytes_read = fread(file_contents, sizeof(char), file_size, file);
 	file_contents[bytes_read] = '\0';
 
-	close(file);
+	fclose(file);
 	return file_contents;
 }
 

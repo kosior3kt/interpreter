@@ -27,7 +27,7 @@ void vm_free()
 interpret_result_e vm_interpret(const char* _code)
 {
 
-	compile();
+	//compile();
 	return INTERPRETER_OK;
 }
 

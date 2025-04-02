@@ -2,6 +2,8 @@
 #define __interpreter_scanner__
 // ../src/scanner.c
 
+#include "common.h"
+
 ////////// types
 
 typedef enum {
