@@ -2,9 +2,8 @@
 #define __interpreter_vm__
 // "../src/vm.c"
 
-#include "common.h"
 #include "chunk.h"
-#include "debug.h"
+#include "common.h"
 
 #define STACK_MAX 1024 //hell yeah - 1kb!
 

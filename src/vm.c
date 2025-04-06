@@ -1,6 +1,10 @@
 #include "../include/vm.h"
 
-#define DEBUG_TRACE
+#include "../include/debug.h"
+#include "../include/compiler.h"
+
+#define DEBUG_TRACE_EXECUTION
+#define DEBUG_PRINT_CODE
 
 
 //////////////////////// global vm state
@@ -26,9 +30,20 @@ void vm_free()
 
 interpret_result_e vm_interpret(const char* _code)
 {
+	chunk_s chunk;
+	init_chunk(&chunk);
+	if(!compile(_code, &chunk)) {
+		free_chunk(&chunk);
+		return INTERPRETER_COMPILER_ERROR;
+	}
 
-	//compile();
-	return INTERPRETER_OK;
+	vm.chunk = &chunk;
+	vm.pc = vm.chunk->data;
+
+	interpret_result_e result = run();
+
+	free_chunk(&chunk);
+	return result;
 }
 
 //////////////////////// helper implementations
@@ -49,7 +64,7 @@ static interpret_result_e run()
 
 	while((instruction = READ_BYTE()) != 0) {
 
-#ifdef DEBUG_TRACE
+#ifdef DEBUG_TRACE_EXECUTION
 		printf("	stack: [");
 		for(value_t* value = vm.stack; value < vm.sp; ++value) {
 			printf("%g, ", *value);

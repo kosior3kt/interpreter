@@ -2,11 +2,11 @@
 #define __interpreter_compiler__
 // ../src/compiler.c
 
-#include "common.h"
-#include "chunk.h"
-#include "scanner.h"
+#include "vm.h"
 
-void compile(const char*);
+
+bool compile(const char*, chunk_s*);
+
 
 
 #endif //__interpreter_compiler__
