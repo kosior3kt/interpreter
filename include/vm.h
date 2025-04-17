@@ -19,7 +19,7 @@ typedef struct {
 	uint8_t* pc;
 	value_t  stack[STACK_MAX];
 	value_t* sp;
-}vm_t;
+}vm_s;
 
 void vm_init();
 void vm_free();

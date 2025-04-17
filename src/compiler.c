@@ -5,6 +5,8 @@
 #include "../include/debug.h"
 #endif
 
+typedef void(*parse_fn_t)();
+
 typedef struct {
 	token_s current;
 	token_s previous;
@@ -25,8 +27,6 @@ typedef enum {
   PREC_CALL,        // . ()
   PREC_PRIMARY
 }precedence_e;
-
-typedef void(*parse_fn_t)();
 
 typedef struct {
 	parse_fn_t prefix;
@@ -83,8 +83,6 @@ static const parse_rule_s rules[] = {
   [TOKEN_ERROR]         = {NULL,     NULL,   PREC_NONE},
   [TOKEN_EOF]           = {NULL,     NULL,   PREC_NONE},
 };
-
-
 
 static parser_s parser; //TODO: can this be static?
 static chunk_s* compiling_chunk;
@@ -179,7 +177,7 @@ static void emit_byte(const uint8_t _byte)
 	append_chunk(current_chunk(), _byte, parser.previous.line);
 }
 
-static void emit_bytes(const uint8_t _byte, const uint8_t _byte2)
+static inline void emit_bytes(const uint8_t _byte, const uint8_t _byte2)
 {
 	emit_byte(_byte);
 	emit_byte(_byte2);
@@ -283,7 +281,6 @@ static void parse_precedence(const precedence_e _precedence)
 		infix_rule();
 	}
 }
-
 
 static const parse_rule_s* get_rule(const token_type_e _type)
 {

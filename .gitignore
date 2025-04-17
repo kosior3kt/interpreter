@@ -1,4 +1,5 @@
 .cache
 tags
 *.dSYM
+build
 

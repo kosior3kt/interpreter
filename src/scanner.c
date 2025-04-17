@@ -98,7 +98,7 @@ static token_s make_error_token(const char* _error_message)
 	return ret_val;
 }
 
-static char advance()
+static inline char advance()
 {
 	return (-1)[++scanner.current];
 }
@@ -225,7 +225,6 @@ static token_type_e identifier_type()
 			}
 		}
 	}
-
 
 	return TOKEN_IDENTIFIER;
 }

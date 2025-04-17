@@ -8,7 +8,7 @@
 
 
 //////////////////////// global vm state
-vm_t vm;
+vm_s vm;
 
 //////////////////////// helper functions
 static interpret_result_e run();
